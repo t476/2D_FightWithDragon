@@ -9,7 +9,6 @@ public class Components : MonoBehaviour
     public int price;
     public int damage;
     public Text equiped;
-    public Image backimage;
 
     public void MyItemOnClick()
     {
