@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerItem : MonoBehaviour
+public class PlayerMyItem : MonoBehaviour
 {
-    public static PlayerItem instance;
+    public static PlayerMyItem instance;
 
     public int exp, gold, MyItemAmount;
 
