@@ -29,8 +29,9 @@ public class InventoryManager : MonoBehaviour
     {
         Components newMyItem = Instantiate(instance.componentPrefab, instance.componentGrid.transform.position, Quaternion.identity);
         newMyItem.gameObject.transform.SetParent(instance.componentGrid.transform);
+        newMyItem.gameObject.transform.localScale = new Vector3(1, 1, 1);
         newMyItem.ComponentsMyItem = MyItem;
-        newMyItem.backimage.sprite = MyItem.MyItemImage;
+        newMyItem.componentImage.sprite = MyItem.MyItemImage;
         newMyItem.price = MyItem.MyItemPrice;
         newMyItem.damage = MyItem.MyItemDamage;
     } 

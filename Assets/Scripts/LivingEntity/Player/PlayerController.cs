@@ -41,6 +41,16 @@ public class PlayerController : MonoBehaviour
     public bool isCantMoving =false;
     public float cantMoveTime;
 
+    [Header("冲刺效果")]
+    public float DashTime;//冲刺时长
+    private float DashTimeLeft;//冲刺剩余时间
+    private float LastDash=-10f;//上次冲刺时间点
+    public float CDTime;//cool down time
+    public float DashSpeed;
+
+
+
+
     private void Awake()
     {
         if (instance == null)
@@ -71,6 +81,16 @@ public class PlayerController : MonoBehaviour
         {
             jumpPressed = true;
         }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            if(Time.time >= (LastDash + CDTime))
+            {
+                //可以执行dash
+                readyToDash();
+
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -83,11 +103,18 @@ public class PlayerController : MonoBehaviour
         isGround = Physics2D.OverlapCircle(groundCheck.position, 0.1f, ground);
         
         Debug.DrawLine(groundCheck.position,new Vector3(groundCheck.position.x,groundCheck.position.y-0.1f,0),Color.red);
+
+        Dash();
+        if (isDashing)
+        {
+            return;
+        }
         GroundMovement();
 
         Jump();
 
         SwitchAnim();
+
     }
 
     void GroundMovement()
@@ -175,5 +202,38 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(cantMoveTime);
         isCantMoving= false;
+    }
+
+    void readyToDash()
+    {
+        isDashing = true;
+        DashTimeLeft = DashTime;
+        LastDash = Time.time;
+         
+    }
+
+    void Dash()
+    {
+        if (isDashing)
+        {
+            if (DashTimeLeft > 0)
+            {
+                if (rb.velocity.y > 0 && !isGround)
+                {
+                    rb.velocity = new Vector2(DashSpeed * horizontalMove, jumpForce);//在空中Dash向上
+                }
+                rb.velocity = new Vector2(DashSpeed * horizontalMove, rb.velocity.y);//地面Dash
+
+                DashTimeLeft -= Time.deltaTime;
+
+                ShadowPool.instance.GetFromPool();
+            }
+            if (DashTimeLeft <= 0)
+            {
+                isDashing = false;
+            }
+        }
+        
+        
     }
 }
