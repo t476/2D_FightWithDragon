@@ -15,7 +15,10 @@ public class Enemy : LivingEntity
     }
     public override void TakenHit(float damage, Vector3 hitPoint, Vector3 hitDirection){
         TimeController.instance.BulletTime(0.5f,0.5f);
+        Debug.Log(333);
        base.TakenHit(damage,hitPoint, hitDirection);
+       Debug.Log(444);
+       LootSpawner.instance.Spawn(transform.position);
 
     }
 
