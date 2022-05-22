@@ -22,7 +22,7 @@ public class Questable : MonoBehaviour
             if (quest.questStatus == Quest.QuestStatus.Waitting)
             {
                 quest.questStatus = Quest.QuestStatus.Accepted;//初次委托时将任务更改为【接收】状态
-                PlayerItem.instance.questList.Add(quest);
+                PlayerMyItem.instance.questList.Add(quest);
 
                 //看看收集类是否已经完成了
                 if (quest.questType == Quest.QuestType.Gathering)
@@ -55,8 +55,8 @@ public class Questable : MonoBehaviour
 
     public void OfferRewards()
     {
-        PlayerItem.instance.exp += quest.expReward;
-        PlayerItem.instance.gold += quest.goldReward;
+        PlayerMyItem.instance.exp += quest.expReward;
+        PlayerMyItem.instance.gold += quest.goldReward;
         QuestManager.instance.UpdateUIText();
         Debug.Log("$*$*$*****Bonus*****$*$*$");
     }
