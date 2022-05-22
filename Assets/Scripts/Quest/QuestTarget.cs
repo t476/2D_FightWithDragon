@@ -27,7 +27,7 @@ public class QuestTarget : MonoBehaviour
                 switch (questType)
                 {
                     case QuestType.Gathering:
-                        if(PlayerItem.instance.itemAmount >= PlayerItem.instance.questList[i].requireAmount)
+                        if(PlayerItem.instance.MyItemAmount >= PlayerItem.instance.questList[i].requireAmount)
                         {
                             PlayerItem.instance.questList[i].questStatus = Quest.QuestStatus.Completed;
                             QuestManager.instance.UpdateQuestList();

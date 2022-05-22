@@ -14,7 +14,7 @@ public class Item : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            PlayerItem.instance.itemAmount += 1;//接触到以后累加加一
+            PlayerItem.instance.MyItemAmount += 1;//接触到以后累加加一
             questTarget.CheckQuestIsComplete();
             Destroy(gameObject);
         }
