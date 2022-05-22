@@ -37,6 +37,7 @@ public class HealthBar : MonoBehaviour
     IEnumerator UpdateHpCo()
     {
         Debug.Log(hp);
+        //percentText.text = targetFillAmount.ToString("F2");
         hp = livingEntityObject.health;
         hpImage.fillAmount = hp / maxHp;
         while (hpEffectImage.fillAmount >= hpImage.fillAmount)

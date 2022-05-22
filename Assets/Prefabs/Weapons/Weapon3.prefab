@@ -173,7 +173,7 @@ MonoBehaviour:
   - {fileID: 4807856800964659746}
   arrow: {fileID: 9186190064236664073, guid: f42950ddb7348f540af45deb9a72f17d, type: 3}
   muzzleVelocity: 10
-  rotateSpeed: 20
+  rotateSpeed: 30
   theCenterPoint: {fileID: 4807856802374239512}
   rotateMove: 0
   minView: 270

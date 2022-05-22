@@ -115,10 +115,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 1110501805984676346, guid: 5cdf81a1094e77a43a89c2f986a38898, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -241,6 +241,36 @@ MonoBehaviour:
   hp: 0
   maxHp: 0
   hurtSpeed: 0.005
+--- !u!1 &1588236348553880860
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7580190560776150665}
+  m_Layer: 10
+  m_Name: wallCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7580190560776150665
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588236348553880860}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.69, y: -0.37, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2062737930282312522}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2062737928569061718
 GameObject:
   m_ObjectHideFlags: 0
@@ -307,6 +337,8 @@ Transform:
   - {fileID: 2062737928569061717}
   - {fileID: 1672263851771598906}
   - {fileID: 1166163884}
+  - {fileID: 7580190560776150665}
+  - {fileID: 5359126458749909547}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -409,6 +441,8 @@ MonoBehaviour:
   scenePassword: 
   isTalking: 0
   isShooting: 0
+  isCantMoving: 0
+  cantMoveTime: 0
 --- !u!50 &2062737930282312518
 Rigidbody2D:
   serializedVersion: 4
@@ -471,6 +505,14 @@ MonoBehaviour:
   maxHealth: 70
   health: 0
   isHurt: 0
+  deltaPostionX: 3
+  backSpeed: 3
+  cantMoveTime: 0.3
+  wallCheck: {fileID: 7580190560776150665}
+  wallCheck2: {fileID: 5359126458749909547}
+  wall:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &3952214035903278792
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,7 +578,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -4663063207240077100, guid: 5cdf81a1094e77a43a89c2f986a38898, type: 3}
+  m_Sprite: {fileID: -1647369041253643428, guid: 5cdf81a1094e77a43a89c2f986a38898, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -546,6 +588,36 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &4345049312132983415
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5359126458749909547}
+  m_Layer: 10
+  m_Name: wallCheck (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5359126458749909547
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4345049312132983415}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.51, y: -0.35, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2062737930282312522}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6841011475781538511
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,11 +683,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1647369041253643428, guid: 5cdf81a1094e77a43a89c2f986a38898, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: -4663063207240077100, guid: 5cdf81a1094e77a43a89c2f986a38898, type: 3}
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BossLife : LivingEntity
+public class BossLife : Enemy
 {
     public static BossLife instance;
     public HealthBar healthBar;
@@ -17,13 +17,17 @@ public class BossLife : LivingEntity
                 Destroy(gameObject);
             }
         }
-        DontDestroyOnLoad(gameObject);
+        
+    }
+    public override void Start() {
+        base.Start();
+        //这都治不好你第一次攻击还是无法识别更新血条，先这样吧
+        GetComponentInChildren<HealthBar>().UpdateHp();
     }
     public override void TakenHit(float damage, Vector3 hitPoint, Vector3 hitDirection)
     {
         //AudioManager.instance.PlaySound("Impact", transform.position);//打到了
         GetComponentInChildren<HealthBar>().UpdateHp();
-        Debug.Log("是不是没执行");
         if (damage >= health)
         {
            // AudioManager.instance.PlaySound("EnemyDeath", transform.position);

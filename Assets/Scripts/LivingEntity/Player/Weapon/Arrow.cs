@@ -54,7 +54,7 @@ public class Arrow : MonoBehaviour
         if (damageableObject != null)
         {
             damageableObject.TakenHit(attackDamage, hitPoint,transform.up);
-             DamageNum damagable = Instantiate(damageCanvas, hitPoint, Quaternion.identity).GetComponent<DamageNum>();
+            DamageNum damagable = Instantiate(damageCanvas, hitPoint, Quaternion.identity).GetComponent<DamageNum>();
             damagable.ShowDamage(Mathf.RoundToInt(attackDamage));
 
         }

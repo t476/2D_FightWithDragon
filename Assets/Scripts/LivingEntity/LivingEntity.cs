@@ -8,7 +8,7 @@ public class LivingEntity : MonoBehaviour, IDamageable
 {
     public float maxHealth;
     public float health;//他的级别是外界不能访问但是允许继承自livingentity的子类可以访问
-    private bool isDead;
+    protected bool isDead;
     [HideInInspector] public bool isHurt;
     public bool isHurtt { get { return isHurt; }  set { isHurt = value; } }
 
@@ -17,7 +17,7 @@ public class LivingEntity : MonoBehaviour, IDamageable
     //子类父类的start方法里override
     //通过关键词virtual明确告知，这个start方法我们允许在子类中复写/重写
     //也可以使用base.start方法在父类的基础上添加额外的部分
-    protected virtual void Start()
+    public virtual void Start()
     {
         health = maxHealth;
     }

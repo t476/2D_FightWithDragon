@@ -35,8 +35,11 @@ public class PlayerController : MonoBehaviour
     [Header("Scene Transition转场")]
     public string scenePassword;
     [Header("对话参数")]
+    //先这样写吧，懒得改整洁了
     public bool isTalking = false;
     public bool isShooting =false;
+    public bool isCantMoving =false;
+    public float cantMoveTime;
 
     private void Awake()
     {
@@ -72,7 +75,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isTalking||isShooting)
+        if (isTalking||isShooting||isCantMoving)
         {
             rb.velocity=new Vector2(0,0);
             return;
@@ -161,5 +164,16 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("jumping", false);
             anim.SetBool("falling", true);
         }
+    }
+    
+    public void CantMove(float cantMovetime){
+        isCantMoving=true;
+        cantMoveTime=cantMovetime;
+        StartCoroutine("canMove");
+    }
+      IEnumerator canMove()
+    {
+        yield return new WaitForSeconds(cantMoveTime);
+        isCantMoving= false;
     }
 }
