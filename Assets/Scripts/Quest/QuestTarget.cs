@@ -19,17 +19,17 @@ public class QuestTarget : MonoBehaviour
     //比如说，NPC对话完成后、到达探索区域、收集完物品
     public void CheckQuestIsComplete()
     {
-        for(int i = 0; i < PlayerMyItem.instance.questList.Count; i++)
+        for(int i = 0; i < PlayerItem.instance.questList.Count; i++)
         {
-            if (questName == PlayerMyItem.instance.questList[i].questName 
-             && PlayerMyItem.instance.questList[i].questStatus == Quest.QuestStatus.Accepted)
+            if (questName == PlayerItem.instance.questList[i].questName 
+             && PlayerItem.instance.questList[i].questStatus == Quest.QuestStatus.Accepted)
             {
                 switch (questType)
                 {
                     case QuestType.Gathering:
-                        if(PlayerMyItem.instance.MyItemAmount >= PlayerMyItem.instance.questList[i].requireAmount)
+                        if(PlayerItem.instance.MyItemAmount >= PlayerItem.instance.questList[i].requireAmount)
                         {
-                            PlayerMyItem.instance.questList[i].questStatus = Quest.QuestStatus.Completed;
+                            PlayerItem.instance.questList[i].questStatus = Quest.QuestStatus.Completed;
                             QuestManager.instance.UpdateQuestList();
                             Debug.Log("UPDATE");
                         }
@@ -38,7 +38,7 @@ public class QuestTarget : MonoBehaviour
                     case QuestType.Talk:
                         if(hasTalked)
                         {
-                            PlayerMyItem.instance.questList[i].questStatus = Quest.QuestStatus.Completed;
+                            PlayerItem.instance.questList[i].questStatus = Quest.QuestStatus.Completed;
                             QuestManager.instance.UpdateQuestList();
                         }
                         break;
@@ -46,7 +46,7 @@ public class QuestTarget : MonoBehaviour
                     case QuestType.Reach:
                         if(hasReach)
                         {
-                            PlayerMyItem.instance.questList[i].questStatus = Quest.QuestStatus.Completed;
+                            PlayerItem.instance.questList[i].questStatus = Quest.QuestStatus.Completed;
                             QuestManager.instance.UpdateQuestList();
                         }
                         break;
@@ -59,9 +59,9 @@ public class QuestTarget : MonoBehaviour
     {
         if (other.CompareTag("Player")) {
 
-            for(int i = 0; i < PlayerMyItem.instance.questList.Count; i++)
+            for(int i = 0; i < PlayerItem.instance.questList.Count; i++)
             {
-                if(PlayerMyItem.instance.questList[i].questName == questName)
+                if(PlayerItem.instance.questList[i].questName == questName)
                 {
                     if (questType == QuestType.Reach)
                     {

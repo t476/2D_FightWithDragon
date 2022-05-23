@@ -113,9 +113,9 @@ public class DialogueManager : MonoBehaviour
                         //这部分是当我们和任务要求的游戏对象，比如隐藏NPC对话时，hasTalked等于True
                         if (talkable.questTarget != null)
                         {
-                            for (int i = 0; i < PlayerMyItem.instance.questList.Count; i++)
+                            for (int i = 0; i < PlayerItem.instance.questList.Count; i++)
                             {
-                                if (talkable.questTarget.questName == PlayerMyItem.instance.questList[i].questName)
+                                if (talkable.questTarget.questName == PlayerItem.instance.questList[i].questName)
                                 {
                                     talkable.questTarget.hasTalked = true;
                                     talkable.questTarget.CheckQuestIsComplete();
@@ -139,10 +139,10 @@ public class DialogueManager : MonoBehaviour
         if (talkable.questable == null)
             return false;
 
-        for (int i = 0; i < PlayerMyItem.instance.questList.Count; i++)
+        for (int i = 0; i < PlayerItem.instance.questList.Count; i++)
         {
-            if (talkable.questable.quest.questName == PlayerMyItem.instance.questList[i].questName
-                && PlayerMyItem.instance.questList[i].questStatus == Quest.QuestStatus.Completed)
+            if (talkable.questable.quest.questName == PlayerItem.instance.questList[i].questName
+                && PlayerItem.instance.questList[i].questStatus == Quest.QuestStatus.Completed)
             {
                 talkable.questable.quest.questStatus = Quest.QuestStatus.Completed;
                 return true;
