@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rb;
     private Collider2D coll;
-    
+
     [Header("运动参数")]
     public float currentSpeed, jumpForce;
     private float horizontalMove;
@@ -24,9 +24,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float shortJumpFactor;
 
     [Header("更好的水平加速减速效果")]
-    [SerializeField] private float horizontalAcceration=5f;
-    [SerializeField] private float horizontalDeceleration=5f;
-    [SerializeField] private float maxSpeed=6f;
+    [SerializeField] private float horizontalAcceration = 5f;
+    [SerializeField] private float horizontalDeceleration = 5f;
+    [SerializeField] private float maxSpeed = 6f;
 
     [Header("动画效果")]
     private Animator anim;
@@ -37,14 +37,14 @@ public class PlayerController : MonoBehaviour
     [Header("对话参数")]
     //先这样写吧，懒得改整洁了
     public bool isTalking = false;
-    public bool isShooting =false;
-    public bool isCantMoving =false;
+    public bool isShooting = false;
+    public bool isCantMoving = false;
     public float cantMoveTime;
 
     [Header("冲刺效果")]
     public float DashTime;//冲刺时长
     private float DashTimeLeft;//冲刺剩余时间
-    private float LastDash=-10f;//上次冲刺时间点
+    private float LastDash = -10f;//上次冲刺时间点
     public float CDTime;//cool down time
     public float DashSpeed;
 
@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        
+
         if (Input.GetButtonDown("Jump") && jumpCount > 0)
         {
             jumpPressed = true;
@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            if(Time.time >= (LastDash + CDTime))
+            if (Time.time >= (LastDash + CDTime))
             {
                 //可以执行dash
                 readyToDash();
@@ -95,14 +95,14 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isTalking||isShooting||isCantMoving)
+        if (isTalking || isShooting || isCantMoving)
         {
-            rb.velocity=new Vector2(0,0);
+            rb.velocity = new Vector2(0, 0);
             return;
         }
         isGround = Physics2D.OverlapCircle(groundCheck.position, 0.1f, ground);
-        
-        Debug.DrawLine(groundCheck.position,new Vector3(groundCheck.position.x,groundCheck.position.y-0.1f,0),Color.red);
+
+        Debug.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - 0.1f, 0), Color.red);
 
         Dash();
         if (isDashing)
@@ -120,18 +120,18 @@ public class PlayerController : MonoBehaviour
     void GroundMovement()
     {
         horizontalMove = Input.GetAxisRaw("Horizontal");//只返回-1，0，1
-        
+
         if (horizontalMove != 0)
-        {   
-            currentSpeed=Mathf.MoveTowards(currentSpeed,maxSpeed,horizontalAcceration*Time.deltaTime);
+        {
+            currentSpeed = Mathf.MoveTowards(currentSpeed, maxSpeed, horizontalAcceration * Time.deltaTime);
             transform.localScale = new Vector3(horizontalMove, 1, 1);
         }
         else
         {
-            currentSpeed=Mathf.MoveTowards(currentSpeed,0,horizontalDeceleration*Time.deltaTime);
+            currentSpeed = Mathf.MoveTowards(currentSpeed, 0, horizontalDeceleration * Time.deltaTime);
         }
         //rb.velocity = new Vector2(horizontalMove * currentSpeed, rb.velocity.y);
-        rb.velocity = new Vector2(currentSpeed*transform.localScale.x, rb.velocity.y);
+        rb.velocity = new Vector2(currentSpeed * transform.localScale.x, rb.velocity.y);
 
     }
 
@@ -192,16 +192,17 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("falling", true);
         }
     }
-    
-    public void CantMove(float cantMovetime){
-        isCantMoving=true;
-        cantMoveTime=cantMovetime;
+
+    public void CantMove(float cantMovetime)
+    {
+        isCantMoving = true;
+        cantMoveTime = cantMovetime;
         StartCoroutine("canMove");
     }
-      IEnumerator canMove()
+    IEnumerator canMove()
     {
         yield return new WaitForSeconds(cantMoveTime);
-        isCantMoving= false;
+        isCantMoving = false;
     }
 
     void readyToDash()
@@ -209,7 +210,7 @@ public class PlayerController : MonoBehaviour
         isDashing = true;
         DashTimeLeft = DashTime;
         LastDash = Time.time;
-         
+
     }
 
     void Dash()
@@ -233,7 +234,5 @@ public class PlayerController : MonoBehaviour
                 isDashing = false;
             }
         }
-        
-        
     }
 }

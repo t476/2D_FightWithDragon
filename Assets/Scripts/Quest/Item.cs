@@ -12,9 +12,9 @@ public class Item : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Player")
+        if (other.tag == "Player")
         {
-            PlayerMyItem.instance.MyItemAmount += 1;//接触到以后累加加一
+            PlayerItem.instance.MyItemAmount += 1;//接触到以后累加加一
             questTarget.CheckQuestIsComplete();
             Destroy(gameObject);
         }

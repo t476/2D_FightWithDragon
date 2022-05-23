@@ -19,13 +19,13 @@ public class DialogueManager : MonoBehaviour
     //设计成单例模式挂在Dialoguepanel下
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
         else
         {
-            if(instance != this)
+            if (instance != this)
             {
                 Destroy(gameObject);
             }
@@ -53,7 +53,7 @@ public class DialogueManager : MonoBehaviour
 
     private void Update()
     {
-        if(dialogueBox.activeInHierarchy)//只在激活panel时检测按下左键
+        if (dialogueBox.activeInHierarchy)//只在激活panel时检测按下左键
         {
             //按下并松开左键
             if (Input.GetMouseButtonUp(0) && !isScrolling)
@@ -113,9 +113,9 @@ public class DialogueManager : MonoBehaviour
                         //这部分是当我们和任务要求的游戏对象，比如隐藏NPC对话时，hasTalked等于True
                         if (talkable.questTarget != null)
                         {
-                            for (int i = 0; i < PlayerMyItem.instance.questList.Count; i++)
+                            for (int i = 0; i < PlayerItem.instance.questList.Count; i++)
                             {
-                                if (talkable.questTarget.questName == PlayerMyItem.instance.questList[i].questName)
+                                if (talkable.questTarget.questName == PlayerItem.instance.questList[i].questName)
                                 {
                                     talkable.questTarget.hasTalked = true;
                                     talkable.questTarget.CheckQuestIsComplete();
@@ -139,10 +139,10 @@ public class DialogueManager : MonoBehaviour
         if (talkable.questable == null)
             return false;
 
-        for (int i = 0; i < PlayerMyItem.instance.questList.Count; i++)
+        for (int i = 0; i < PlayerItem.instance.questList.Count; i++)
         {
-            if (talkable.questable.quest.questName == PlayerMyItem.instance.questList[i].questName
-                && PlayerMyItem.instance.questList[i].questStatus == Quest.QuestStatus.Completed)
+            if (talkable.questable.quest.questName == PlayerItem.instance.questList[i].questName
+                && PlayerItem.instance.questList[i].questStatus == Quest.QuestStatus.Completed)
             {
                 talkable.questable.quest.questStatus = Quest.QuestStatus.Completed;
                 return true;
@@ -164,7 +164,7 @@ public class DialogueManager : MonoBehaviour
     //检查对话内容是否含有对话者的名字
     private void CheckName()
     {
-        if(dialogueLines[currentLine].StartsWith("n-"))
+        if (dialogueLines[currentLine].StartsWith("n-"))
         {
             nameText.text = dialogueLines[currentLine].Replace("n-", "");//在NameText处显示名字，并且去除标记n-
             currentLine++;//跳过显示名字的这一行
@@ -177,7 +177,7 @@ public class DialogueManager : MonoBehaviour
         isScrolling = true;
         dialogueText.text = "";//清空
 
-        foreach(char letter in dialogueLines[currentLine].ToCharArray())
+        foreach (char letter in dialogueLines[currentLine].ToCharArray())
         {
             dialogueText.text += letter;//HELLO => H->E->L->L->O//MARKER Letter by Letter Show
             yield return new WaitForSeconds(scrollingSpeed);
