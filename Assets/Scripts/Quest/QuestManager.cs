@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 //这个脚本将会放在【UI Canvas】游戏对象上 任务UI列表
 public class QuestManager : MonoBehaviour
-{
+{   
     public static QuestManager instance;
 
     public GameObject[] questArray;
@@ -38,26 +38,26 @@ public class QuestManager : MonoBehaviour
     public void UpdateQuestList()
     {
         //如果我们要将【完成的任务】移出UI任务列表，我们就不能这么遍历，而是遍历有多少UI任务栏 TODO
-        for (int i = 0; i < PlayerItem.instance.questList.Count; i++)//有多少个任务显示多少个List，而不是有多少List显示多少个任务
+        for(int i = 0; i < PlayerMyItem.instance.questList.Count; i++)//有多少个任务显示多少个List，而不是有多少List显示多少个任务
         {
-            questArray[i].transform.GetChild(0).GetComponent<Text>().text = PlayerItem.instance.questList[i].questName;
+            questArray[i].transform.GetChild(0).GetComponent<Text>().text = PlayerMyItem.instance.questList[i].questName;
 
-            if (PlayerItem.instance.questList[i].questStatus == Quest.QuestStatus.Accepted)
+            if(PlayerMyItem.instance.questList[i].questStatus == Quest.QuestStatus.Accepted)
             {
                 questArray[i].transform.GetChild(1).GetComponent<Text>().text
-                = "<color=red>" + PlayerItem.instance.questList[i].questStatus + "</color>";
+                = "<color=red>" + PlayerMyItem.instance.questList[i].questStatus + "</color>";
             }
-            else if (PlayerItem.instance.questList[i].questStatus == Quest.QuestStatus.Completed)
+            else if (PlayerMyItem.instance.questList[i].questStatus == Quest.QuestStatus.Completed)
             {
                 questArray[i].transform.GetChild(1).GetComponent<Text>().text
-                = "<color=lime>" + PlayerItem.instance.questList[i].questStatus + "</color>";
+                = "<color=lime>" + PlayerMyItem.instance.questList[i].questStatus + "</color>";
             }
         }
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && PlayerController.instance.isTalking == false)
+        if(Input.GetKeyDown(KeyCode.Escape) && PlayerController.instance.isTalking == false)
         {
             questPanel.gameObject.SetActive(!questPanel.activeInHierarchy);
         }
@@ -72,7 +72,7 @@ public class QuestManager : MonoBehaviour
 
     public void UpdateUIText()
     {
-        expText.text = "EXP: " + PlayerItem.instance.exp;
-        goldText.text = "GOLD: " + PlayerItem.instance.gold;
+        expText.text = "EXP: " + PlayerMyItem.instance.exp;
+        goldText.text = "GOLD: " + PlayerMyItem.instance.gold;
     }
 }

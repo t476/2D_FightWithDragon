@@ -15,6 +15,7 @@ public class ShadowPool : MonoBehaviour
         instance = this;
         //初始化对象池
         FillPool();
+        DontDestroyOnLoad(this);
     }
 
     public void FillPool()

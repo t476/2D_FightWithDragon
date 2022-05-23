@@ -3,7 +3,6 @@ using UnityEngine;
 public class BossLife : Enemy
 {
     public static BossLife instance;
-    public float diaoyongDamage;
     public HealthBar healthBar;
     private void Awake()
     {
@@ -27,12 +26,8 @@ public class BossLife : Enemy
     }
     public override void TakenHit(float damage, Vector3 hitPoint, Vector3 hitDirection)
     {
-        diaoyongDamage=damage;
-        //这里生成金币奖励
-        
         //AudioManager.instance.PlaySound("Impact", transform.position);//打到了
         GetComponentInChildren<HealthBar>().UpdateHp();
-        
         if (damage >= health)
         {
            // AudioManager.instance.PlaySound("EnemyDeath", transform.position);

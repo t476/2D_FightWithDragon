@@ -1,14 +1,16 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
-public class UIManager: MonoBehaviour
-
+public class PlayerMyItem : MonoBehaviour
 {
-    public static UIManager instance;
-    public  Text goldText;
+    public static PlayerMyItem instance;
+
+    public int exp, gold, MyItemAmount;
+
+    //之后其他脚本就可以获得这个list了
+    public List<Quest> questList = new List<Quest>();
+
     private void Awake()
     {
         if (instance == null)
@@ -22,9 +24,6 @@ public class UIManager: MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        
-    }
-    private void Update() {
-        goldText.text=PlayerItem.instance.gold.ToString();
+        DontDestroyOnLoad(gameObject);
     }
 }

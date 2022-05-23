@@ -17,12 +17,12 @@ public class Questable : MonoBehaviour
     //当可委派任务NPC对话完成后，调用这个方法
     public void DelegateQuest()
     {
-        if (isFinished == false)
+        if(isFinished == false)
         {
             if (quest.questStatus == Quest.QuestStatus.Waitting)
             {
                 quest.questStatus = Quest.QuestStatus.Accepted;//初次委托时将任务更改为【接收】状态
-                PlayerItem.instance.questList.Add(quest);
+                PlayerMyItem.instance.questList.Add(quest);
 
                 //看看收集类是否已经完成了
                 if (quest.questType == Quest.QuestType.Gathering)
@@ -30,7 +30,7 @@ public class Questable : MonoBehaviour
                     questTarget.CheckQuestIsComplete();
 
                     #region
-                    if (DialogueManager.instance.GetQuestResult() == true)
+                    if(DialogueManager.instance.GetQuestResult() == true)
                     {
                         DialogueManager.instance.ShowDialogue(DialogueManager.instance.talkable.congratsLines, DialogueManager.instance.talkable.hasName);
                         isFinished = true;
@@ -42,7 +42,7 @@ public class Questable : MonoBehaviour
             else
             {
                 Debug.Log(string.Format("QUEST: {0} has accepted already!", quest.questName));
-                //  Debug.Log("QUEST : " + quest.questName + "has has accepted already!");
+              //  Debug.Log("QUEST : " + quest.questName + "has has accepted already!");
             }
         }
         else
@@ -55,8 +55,8 @@ public class Questable : MonoBehaviour
 
     public void OfferRewards()
     {
-        PlayerItem.instance.exp += quest.expReward;
-        PlayerItem.instance.gold += quest.goldReward;
+        PlayerMyItem.instance.exp += quest.expReward;
+        PlayerMyItem.instance.gold += quest.goldReward;
         QuestManager.instance.UpdateUIText();
         Debug.Log("$*$*$*****Bonus*****$*$*$");
     }
@@ -65,7 +65,7 @@ public class Questable : MonoBehaviour
     //MARKER 这个方法将会在SceneTransition脚本中调用
     public void SaveData()
     {
-        switch (quest.questStatus)
+        switch(quest.questStatus)
         {
             case Quest.QuestStatus.Waitting:
                 PlayerPrefs.SetInt(quest.questName, (int)Quest.QuestStatus.Waitting);
@@ -80,7 +80,7 @@ public class Questable : MonoBehaviour
                 break;
         }
 
-        switch (isFinished)
+        switch(isFinished)
         {
             case true:
                 PlayerPrefs.SetInt(quest.questName + " isFinished", 0);
@@ -95,7 +95,7 @@ public class Questable : MonoBehaviour
     //MARKER 这个方法将会在Start方法中被调用
     public void LoadData()
     {
-        switch (PlayerPrefs.GetInt(quest.questName))
+        switch(PlayerPrefs.GetInt(quest.questName))
         {
             case 0:
                 quest.questStatus = Quest.QuestStatus.Waitting;
@@ -110,7 +110,7 @@ public class Questable : MonoBehaviour
                 break;
         }
 
-        switch (PlayerPrefs.GetInt(quest.questName + " isFinished"))
+        switch(PlayerPrefs.GetInt(quest.questName + " isFinished"))
         {
             case 0:
                 isFinished = true;

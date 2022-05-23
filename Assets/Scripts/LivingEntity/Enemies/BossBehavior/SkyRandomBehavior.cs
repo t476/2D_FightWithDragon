@@ -27,7 +27,7 @@ public class SkyRandomBehavior:StateMachineBehaviour
             theSkyRandomtimer -= Time.deltaTime;
         }
 
-       // Vector2 target = new Vector2(playerPos.position.x, animator.transform.position.y);
+        Vector2 target = new Vector2(playerPos.position.x, animator.transform.position.y);
        
         //这里动画机有一个不能改变位置的问题，尝试网上种种方法未果，给要动画移动的放在他的子物体试试吧，应该就解决了
       //  animator.transform.position = Vector2.MoveTowards(animator.transform.position, target, speed * Time.deltaTime);
