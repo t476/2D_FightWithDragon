@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class PlayerItem : MonoBehaviour
 {
     public static PlayerItem instance;
+
 
     public int exp, gold, MyItemAmount;
 
