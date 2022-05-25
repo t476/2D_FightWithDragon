@@ -10,6 +10,9 @@ public class Attack1 : MonoBehaviour
     int attackDamage;
     [Header("攻击数值可视化")]//可以整到父类里
     [SerializeField]private GameObject damageCanvas;
+
+
+
     void Start()
     {
         
@@ -20,13 +23,14 @@ public class Attack1 : MonoBehaviour
     {
 
     }
+
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Enemy")
         {
-            attackDamage = (int)Random.Range(minAttack, maxAttack);
 
-            Debug.Log("We have Hitted the Enemy!");
+            attackDamage = (int)Random.Range(minAttack, maxAttack);
             IDamageable enemyDamage = other.GetComponent<IDamageable>();
             if (!enemyDamage.isHurtt)
             {
@@ -56,6 +60,6 @@ public class Attack1 : MonoBehaviour
     public void EndAttack()
     {
         gameObject.SetActive(false);
-        
+        Weapon1.isAttack = false;
     }
 }
