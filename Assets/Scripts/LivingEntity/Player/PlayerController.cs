@@ -48,7 +48,8 @@ public class PlayerController : MonoBehaviour
     public float CDTime;//cool down time
     public float DashSpeed;
 
-
+    [Header("攻击前进控制")]
+    public float AttackForwardSpeed;
 
 
     private void Awake()
@@ -120,15 +121,19 @@ public class PlayerController : MonoBehaviour
     void GroundMovement()
     {
         horizontalMove = Input.GetAxisRaw("Horizontal");//只返回-1，0，1
-        
-        if (horizontalMove != 0)
+        if ((horizontalMove != 0)&&(!Weapon1.isAttack))
         {   
             currentSpeed=Mathf.MoveTowards(currentSpeed,maxSpeed,horizontalAcceration*Time.deltaTime);
             transform.localScale = new Vector3(horizontalMove, 1, 1);
         }
+        else if(Weapon1.isAttack)
+        {
+            currentSpeed=Mathf.MoveTowards(currentSpeed,AttackForwardSpeed,horizontalDeceleration*Time.deltaTime);
+            rb.velocity = new Vector2(currentSpeed * transform.localScale.x, rb.velocity.y);
+        }
         else
         {
-            currentSpeed=Mathf.MoveTowards(currentSpeed,0,horizontalDeceleration*Time.deltaTime);
+            currentSpeed = Mathf.MoveTowards(currentSpeed, 0, horizontalDeceleration * Time.deltaTime);
         }
         //rb.velocity = new Vector2(horizontalMove * currentSpeed, rb.velocity.y);
         rb.velocity = new Vector2(currentSpeed*transform.localScale.x, rb.velocity.y);
