@@ -21,7 +21,7 @@ public class Weapon1 : MonoBehaviour
         if (Time.time > nextShotTime)//计时器限制发射频率
         {
             nextShotTime = Time.time + (msBetweenShots / 1000);
-            transform.GetChild(0).gameObject.SetActive(true);
+            transform.GetChild(0).gameObject.SetActive(true);//武器和本体是分开的
         }
     }
 

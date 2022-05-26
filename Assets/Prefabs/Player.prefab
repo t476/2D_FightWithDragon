@@ -269,7 +269,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1588236348553880860}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.69, y: -0.37, z: 0}
+  m_LocalPosition: {x: 0.606, y: -0.37, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -300,7 +300,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2062737928569061718}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.128, y: -0.951, z: 0}
+  m_LocalPosition: {x: 0.002, y: -1.179, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -322,7 +322,7 @@ GameObject:
   - component: {fileID: 2062737930282312518}
   - component: {fileID: 2062737930282312519}
   - component: {fileID: 700778389}
-  - component: {fileID: 8746717300968695750}
+  - component: {fileID: 1784753581}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -391,7 +391,7 @@ SpriteRenderer:
   m_SortingLayerID: -2042844543
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 72de0c64f2c6a498096698322c976a67, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6ed9e5c652cdb87428d9442ae47bd0ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -490,18 +490,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.073717505, y: -0.3440113}
+  m_Offset: {x: -0.073717415, y: -0.22639966}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.0625, y: 2}
+    oldSize: {x: 1.6, y: 2.4}
     newSize: {x: 0.33, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.3253307, y: 1.3119774}
+  m_Size: {x: 1.0796291, y: 1.9146137}
   m_EdgeRadius: 0
 --- !u!114 &700778389
 MonoBehaviour:
@@ -526,7 +526,7 @@ MonoBehaviour:
   wall:
     serializedVersion: 2
     m_Bits: 256
---- !u!114 &8746717300968695750
+--- !u!114 &1784753581
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -535,11 +535,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2062737930282312524}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20c3164a467865d4082b903e535f696c, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a4cd718bd4a3b64fafeaad9bfc45f6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   exp: 0
-  gold: 100
+  gold: 0
   MyItemAmount: 0
   questList: []
 --- !u!1 &3952214035903278792
@@ -642,7 +642,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4345049312132983415}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.51, y: -0.35, z: 0}
+  m_LocalPosition: {x: -0.56, y: -0.33, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
