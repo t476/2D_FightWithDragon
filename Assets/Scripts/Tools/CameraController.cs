@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
-//这是可行的嫌弃没渐变或许可以加一段动画但是先这样吧
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
+
+//因为PostProcessing包和渲染管线URP不兼容，所以用URP的GlobalVolume实现这个颜色变化的功能
 public class CameraController : MonoBehaviour
 {
 
@@ -24,7 +26,7 @@ public class CameraController : MonoBehaviour
         }
     }
     public void ChangeColor(){
-        gameObject.GetComponent<PostProcessVolume>().enabled=false;
+        gameObject.GetComponent<Volume>().enabled=false;
     }
 }
     
