@@ -18,7 +18,7 @@ TagManager:
   - Enemy
   - Player
   - PostProcessing
-  - 
+  - Ladder
   - 
   - 
   - 
@@ -50,6 +50,9 @@ TagManager:
     locked: 0
   - name: OtherLivingEntity
     uniqueID: 2579244479
+    locked: 0
+  - name: Ladder
+    uniqueID: 3669455371
     locked: 0
   - name: Player
     uniqueID: 2252122753

@@ -51,7 +51,20 @@ public class PlayerController : MonoBehaviour
     [Header("攻击前进控制")]
     public float AttackForwardSpeed;
 
+    [Header("梯子的设置")]
+    public float onLadderSpeed;
+    private bool isLadder;
+    public bool canClimb;
 
+
+    private bool isRuning;
+    private bool isJumping;
+    private bool isFalling;
+    private bool isClimbing;
+
+    private float playerGravityScale;
+
+    private float moveY = 0;
     private void Awake()
     {
         if (instance == null)
@@ -66,6 +79,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         DontDestroyOnLoad(gameObject);
+
     }
 
     void Start()
@@ -73,6 +87,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
+        playerGravityScale = rb.gravityScale;
     }
 
     void Update()
@@ -80,7 +95,8 @@ public class PlayerController : MonoBehaviour
         
         if (Input.GetButtonDown("Jump") && jumpCount > 0)
         {
-            jumpPressed = true;
+           jumpPressed = true;
+            canClimb = true;
         }
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -92,6 +108,10 @@ public class PlayerController : MonoBehaviour
 
             }
         }
+      
+            Climb();
+        
+        
     }
 
     private void FixedUpdate()
@@ -116,6 +136,11 @@ public class PlayerController : MonoBehaviour
 
         SwitchAnim();
 
+        CheckIfIsLadder();
+
+        GetCondition();
+
+        
     }
 
     void GroundMovement()
@@ -191,11 +216,17 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetBool("jumping", true);
         }
-        else if (rb.velocity.y <= 0)
+        else if (rb.velocity.y <= 0 && !isLadder)
         {
             anim.SetBool("jumping", false);
-            anim.SetBool("falling", true);
+            //anim.SetBool("falling", true);
         }
+        else if(rb.velocity.y <=0 && isLadder)
+        {
+            anim.SetBool("jumping", false);
+            anim.SetBool("falling", false);
+        }
+
     }
     
     public void CantMove(float cantMovetime){
@@ -240,5 +271,75 @@ public class PlayerController : MonoBehaviour
         }
         
         
+    }
+
+    void CheckIfIsLadder()
+    {
+        isLadder = coll.IsTouchingLayers(LayerMask.GetMask("Ladder"));
+    }
+
+
+    void GetCondition()
+    {
+        isClimbing = anim.GetBool("Climbing");
+        isJump = anim.GetBool("jumping");
+    }
+
+    void Climb()
+    {
+        if (Input.GetKey(key: KeyCode.W))
+        {
+            moveY = 1;
+        }
+        else if (Input.GetKey(key: KeyCode.S))
+        {
+            moveY = -1;
+
+        }
+        else
+        {
+            moveY = 0;
+        }
+        if (isClimbing)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, moveY * onLadderSpeed);
+        }
+
+        if (isLadder)
+        {
+            if (moveY > 0.5f || moveY < -0.5f)
+            {
+                anim.SetBool("jumping", false);
+                anim.SetBool("Climbing", true);
+                rb.velocity = new Vector2(rb.velocity.x, moveY * onLadderSpeed);
+                Debug.Log("10");
+                rb.gravityScale = 0.0f;
+            }
+            else
+            {
+                if (isJumping || isFalling )
+                {
+                    anim.SetBool("Climbing", false);
+                }
+                else
+                {
+                    anim.SetBool("Climbing", false);
+                    rb.velocity = new Vector2(rb.velocity.x, 0.0f);
+
+                }
+            }
+        }
+        else
+        {
+            anim.SetBool("Climbing", false);
+            rb.gravityScale = playerGravityScale;
+        }
+
+        if (isLadder && isGround)
+        {
+            rb.gravityScale = playerGravityScale;
+        }
+
+        //Debug.Log("myRigidbody.gravityScale:"+ myRigidbody.gravityScale);
     }
 }
