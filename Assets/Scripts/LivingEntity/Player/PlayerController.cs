@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
 {
     //单例模式:
     public static PlayerController instance;
-
     private Rigidbody2D rb;
     private Collider2D coll;
     
@@ -39,6 +38,7 @@ public class PlayerController : MonoBehaviour
     public bool isTalking = false;
     public bool isShooting =false;
     public bool isCantMoving =false;
+    public bool isAttack;
     public float cantMoveTime;
 
     [Header("冲刺效果")]
@@ -48,7 +48,15 @@ public class PlayerController : MonoBehaviour
     public float CDTime;//cool down time
     public float DashSpeed;
 
+<<<<<<< Updated upstream
 
+=======
+    [Header("攻击前进控制")]
+    public float AttackForwardSpeed;
+    [Header("补偿速度")]
+    public float lightSpeed;
+    public float heavySpeed;
+>>>>>>> Stashed changes
 
 
     private void Awake()
@@ -97,24 +105,35 @@ public class PlayerController : MonoBehaviour
     {
         if (isTalking||isShooting||isCantMoving)
         {
+            //这里要改，动画也要是idle当对话时
             rb.velocity=new Vector2(0,0);
             return;
         }
-        isGround = Physics2D.OverlapCircle(groundCheck.position, 0.1f, ground);
-        
-        Debug.DrawLine(groundCheck.position,new Vector3(groundCheck.position.x,groundCheck.position.y-0.1f,0),Color.red);
+        //加上补偿移动，但是远程攻击就不用，这还要看做不做远程攻击，做就再加参数
+        if(isAttack){
+           if (Attack1.attackType == "Light")
+                rb.velocity = new Vector2(transform.localScale.x * lightSpeed, rb.velocity.y);
+            else if (Attack1.attackType == "Heavy")
+                rb.velocity = new Vector2(transform.localScale.x * heavySpeed, rb.velocity.y);
 
-        Dash();
-        if (isDashing)
-        {
-            return;
         }
-        GroundMovement();
+        else{
+            isGround = Physics2D.OverlapCircle(groundCheck.position, 0.1f, ground);
+            
+            Debug.DrawLine(groundCheck.position,new Vector3(groundCheck.position.x,groundCheck.position.y-0.1f,0),Color.red);
+            if(!isAttack){
+                Dash();
+                if (isDashing)
+                {
+                    return;
+                }
+                GroundMovement();
 
-        Jump();
+                Jump();
 
-        SwitchAnim();
-
+                SwitchAnim();
+            }
+        }
     }
 
     void GroundMovement()
@@ -220,12 +239,12 @@ public class PlayerController : MonoBehaviour
             {
                 if (rb.velocity.y > 0 && !isGround)
                 {
-                    rb.velocity = new Vector2(DashSpeed * horizontalMove, jumpForce);//在空中Dash向上
+                    rb.velocity = new Vector2(DashSpeed * transform.localScale.x, jumpForce);//在空中Dash向上
                 }
-                rb.velocity = new Vector2(DashSpeed * horizontalMove, rb.velocity.y);//地面Dash
+                rb.velocity = new Vector2(DashSpeed * transform.localScale.x, rb.velocity.y);//地面Dash
 
                 DashTimeLeft -= Time.deltaTime;
-
+               
                // ShadowPool.instance.GetFromPool();
             }
             if (DashTimeLeft <= 0)
@@ -235,5 +254,11 @@ public class PlayerController : MonoBehaviour
         }
         
         
+    }
+    //不放在最后一帧，因为连击存在预输入
+    public void AttackOver()
+    {   anim.SetBool("HeavyAttack", false);
+        anim.SetBool("LightAttack", false);
+        PlayerController.instance.isAttack = false;
     }
 }

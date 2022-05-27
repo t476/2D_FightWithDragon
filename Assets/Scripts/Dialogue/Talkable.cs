@@ -11,6 +11,9 @@ public class Talkable : MonoBehaviour
     [TextArea(1, 4)] public string[] completedLines;
 
     public GameObject talkIcon;//用来提示玩家可以对话的UI交互
+    [Header("救我相关")]
+    //怎么尝试get
+    public SaveMeQuest saveMeQuest;
 
     public Questable questable;//当前说话的NPC，是否含有可以委派任务的能力
     public QuestTarget questTarget;//这个脚本中并没有访问，但是在DM脚本中有使用到这个变量
@@ -44,26 +47,39 @@ public class Talkable : MonoBehaviour
 
     private void Update()
     {
-        //这里的限制
+        //这里的限制要加上如果是save类的
         if(isEntered && Input.GetKeyDown(KeyCode.Q) && DialogueManager.instance.dialogueBox.activeInHierarchy == false)
         {
-            if(questable == null)
+            if(questable==null && saveMeQuest == null)
             {
                 DialogueManager.instance.ShowDialogue(lines, hasName);
                 //Debug.Log("BOARD LINES");
             }
             else
             {
-                if (questable.quest.questStatus == Quest.QuestStatus.Completed)
+                Debug.Log("else");
+                if (questable)
                 {
-                    DialogueManager.instance.ShowDialogue(completedLines, hasName);
-                    //Debug.Log("COMPLETED LINES");
+                    Debug.Log("questable");
+                    if (questable.quest.questStatus == Quest.QuestStatus.Completed)
+                    {
+                        Debug.Log("Completed");
+                        DialogueManager.instance.ShowDialogue(completedLines, hasName);
+                        //Debug.Log("COMPLETED LINES");
+                    }
+                    else DialogueManager.instance.ShowDialogue(lines, hasName);
                 }
-                else
+                else if (saveMeQuest)
                 {
-                    DialogueManager.instance.ShowDialogue(lines, hasName);
-                    //Debug.Log("NORMAL NPC LINES");
+                    Debug.Log("saveMeQuest");
+                    if (saveMeQuest.saved)
+                    {
+                        Debug.Log("saved");
+                        DialogueManager.instance.ShowDialogue(completedLines, hasName);
+                     }
+                    else DialogueManager.instance.ShowDialogue(lines, hasName);
                 }
+               
             }
         }
     }
