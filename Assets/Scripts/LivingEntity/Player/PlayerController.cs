@@ -48,15 +48,13 @@ public class PlayerController : MonoBehaviour
     public float CDTime;//cool down time
     public float DashSpeed;
 
-<<<<<<< Updated upstream
 
-=======
     [Header("攻击前进控制")]
     public float AttackForwardSpeed;
     [Header("补偿速度")]
     public float lightSpeed;
     public float heavySpeed;
->>>>>>> Stashed changes
+
 
 
     private void Awake()

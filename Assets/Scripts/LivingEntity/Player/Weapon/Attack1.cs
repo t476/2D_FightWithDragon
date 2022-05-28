@@ -9,8 +9,6 @@ public class Attack1 : MonoBehaviour
     int attackDamage;
     [Header("攻击数值可视化")]//可以整到父类里
     [SerializeField]private GameObject damageCanvas;
-<<<<<<< Updated upstream
-=======
     [Header("连击时停")]
     public int lightPause;
     public int heavyPause;
@@ -30,7 +28,7 @@ public class Attack1 : MonoBehaviour
 
 
 
->>>>>>> Stashed changes
+
     void Start()
     {
         
@@ -60,8 +58,7 @@ public class Attack1 : MonoBehaviour
             }
         }
     }
-<<<<<<< Updated upstream
-=======
+
     //为什么运行到lightattack2会卡住--一个可以自己重播的功能
     void Attack()
     {
@@ -91,7 +88,7 @@ public class Attack1 : MonoBehaviour
     }
 */
 
->>>>>>> Stashed changes
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Enemy")
@@ -126,17 +123,17 @@ public class Attack1 : MonoBehaviour
     }
 
     //在刀光动画结束后的事件调用
-<<<<<<< Updated upstream
+
     public void EndAttack()
     {
         gameObject.SetActive(false);
         
     }
-=======
+
    // public void EndAttack()
   //  {
       //  gameObject.SetActive(false);
     //    Weapon1.isAttack = false;
     //}
->>>>>>> Stashed changes
+
 }

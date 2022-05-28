@@ -63,8 +63,10 @@ public class DialogueManager : MonoBehaviour
             //当任务为save类
             if (talkable.saveMeQuest&&Input.GetKeyUp(KeyCode.Return) &&!talkable.saveMeQuest.saved)
             {
+                PlayerEnergy.instance.ep -= talkable.saveMeQuest.energyDelta;
+                EnergyBar.instance.UpdateEp();
                 //任务完成
-                //好像只需要加一个bool 是否需要save
+                //todo如果save以后1，要调用精力条，精力--2对话结束后要开出奖励list
                 talkable.saveMeQuest.saved = true;
                 Debug.Log("任务完成");
                 if (!talkable.saveMeQuest.isFinished)
