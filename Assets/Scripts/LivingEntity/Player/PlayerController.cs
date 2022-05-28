@@ -219,7 +219,7 @@ public class PlayerController : MonoBehaviour
         else if (rb.velocity.y <= 0 && !isLadder)
         {
             anim.SetBool("jumping", false);
-            //anim.SetBool("falling", true);
+            anim.SetBool("falling", true);
         }
         else if(rb.velocity.y <=0 && isLadder)
         {
@@ -312,7 +312,6 @@ public class PlayerController : MonoBehaviour
                 anim.SetBool("jumping", false);
                 anim.SetBool("Climbing", true);
                 rb.velocity = new Vector2(rb.velocity.x, moveY * onLadderSpeed);
-                Debug.Log("10");
                 rb.gravityScale = 0.0f;
             }
             else
