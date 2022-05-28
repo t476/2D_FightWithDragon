@@ -8,6 +8,9 @@ public class BreakableTilemap : MonoBehaviour
     public float offsetX;
     public float offsetY;
 
+    public GameObject breakeffects;
+    public GameObject grid;
+
     private Tilemap destructibleTilemap;
 
     private Vector3 pos1;
@@ -47,21 +50,53 @@ public class BreakableTilemap : MonoBehaviour
             pos7 = new Vector3(hitPos.x - offsetX, hitPos.y + offsetY, 0f);
             pos8 = new Vector3(hitPos.x - offsetX, hitPos.y - offsetY, 0f);
             Vector3Int position = destructibleTilemap.WorldToCell(pos1);
-            destructibleTilemap.SetTile(position, null);
+            if (destructibleTilemap.GetTile(position) != null)
+            {
+                destructibleTilemap.SetTile(position, null);
+                GameObject emmiter1 = Instantiate(breakeffects, position, Quaternion.identity, grid.transform);
+            }
             position = destructibleTilemap.WorldToCell(pos2);
-            destructibleTilemap.SetTile(position, null);
+            if (destructibleTilemap.GetTile(position) != null)
+            {
+                destructibleTilemap.SetTile(position, null);
+                GameObject emmiter2 = Instantiate(breakeffects,position, Quaternion.identity, grid.transform);
+            }
             position = destructibleTilemap.WorldToCell(pos3);
-            destructibleTilemap.SetTile(position, null);
+            if (destructibleTilemap.GetTile(position) != null)
+            {
+                destructibleTilemap.SetTile(position, null);
+                GameObject emmiter3 = Instantiate(breakeffects, position, Quaternion.identity, grid.transform);
+            }
             position = destructibleTilemap.WorldToCell(pos4);
-            destructibleTilemap.SetTile(position, null);
+            if (destructibleTilemap.GetTile(position) != null)
+            {
+                destructibleTilemap.SetTile(position, null);
+                GameObject emmiter4 = Instantiate(breakeffects, position, Quaternion.identity, grid.transform);
+            }
             position = destructibleTilemap.WorldToCell(pos5);
-            destructibleTilemap.SetTile(position, null);
+            if (destructibleTilemap.GetTile(position) != null)
+            {
+                destructibleTilemap.SetTile(position, null);
+                GameObject emmiter5 = Instantiate(breakeffects, position, Quaternion.identity, grid.transform);
+            }
             position = destructibleTilemap.WorldToCell(pos6);
-            destructibleTilemap.SetTile(position, null);
+            if (destructibleTilemap.GetTile(position) != null)
+            {
+                destructibleTilemap.SetTile(position, null);
+                GameObject emmiter6 = Instantiate(breakeffects, position, Quaternion.identity, grid.transform);
+            }
             position = destructibleTilemap.WorldToCell(pos7);
-            destructibleTilemap.SetTile(position, null);
+            if (destructibleTilemap.GetTile(position) != null)
+            {
+                destructibleTilemap.SetTile(position, null);
+                GameObject emmiter7 = Instantiate(breakeffects, position, Quaternion.identity, grid.transform);
+            }
             position = destructibleTilemap.WorldToCell(pos8);
-            destructibleTilemap.SetTile(position, null);
+            if (destructibleTilemap.GetTile(position) != null)
+            {
+                destructibleTilemap.SetTile(position, null);
+                GameObject emmiter8 = Instantiate(breakeffects, position, Quaternion.identity, grid.transform);
+            }
         }
     }
 }
